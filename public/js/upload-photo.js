@@ -1,8 +1,9 @@
-var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/dxrhczeo9/upload';
+var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/dxrhczeo9/upload/';
 var CLOUDINARY_UPLOAD_PRESET = 'fzl0siot'
 
 var imgPreview = document.getElementById('img-preview');
 var fileUpload = document.getElementById('file-upload');
+
 
 fileUpload.addEventListener('change', function(event) {
   
@@ -36,7 +37,7 @@ fileUpload.addEventListener('change', function(event) {
 
 
     $("#save-pic-button").on("click", function(event) {
-     
+      window.location.href = '/members';
       const data = {
        url: imgPreview.src,
        id: 1
@@ -54,12 +55,15 @@ fileUpload.addEventListener('change', function(event) {
         data: data
       })
       .then(function(res) {
-        console.log(res);
+        console.log(res.user);
+        
         });
          
         });
 
       });
+
+      
 
 
       

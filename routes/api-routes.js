@@ -76,9 +76,6 @@ db.User.update(
     id: req.body.id   
   }
 })
-.then(function() {
-  res.redirect(307, "/members");
-})
 .catch(function(err) {
   res.status(401).json(err);
 });
@@ -90,4 +87,75 @@ db.User.update(
 /****************************************************************************************** */
 /****************************************************************************************** */
 /****************************************************************************************** */
+
+
+
+app.get("/api/users/", function(req, res) {
+  db.User.findAll({})
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+
+app.get("/api/users/:id", function(req, res) {
+  db.User.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+// working on post api
+//////////////////////////////////////////////////////////////////////////////
+
+app.post("/api/post", function(req, res) {
+  db.Post.create({
+    body: req.body.body,
+    author_id: req.body.author_id
+  })
+    .then(function() {
+      console.log("You've succesfully added a post");
+    })
+    .catch(function(err) {
+      res.status(401).json(err);
+    });
+});
+
+
+app.get("/api/post", function(req, res) {
+  db.Post.findAll({
+    include: [db.User]
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+app.get("/api/post/:id", function(req, res) {
+  db.Post.findAll({
+    include: [db.User],
+    where: {
+      author_id: req.params.id
+    }
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+
+
+
+
+
+
+
+// working on post api
+//////////////////////////////////////////////////////////////////////////////
+
+
 };
