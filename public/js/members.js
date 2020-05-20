@@ -6,11 +6,21 @@ $(document).ready(function() {
     console.log(data.email)
   });
 
-  
 });
 
 
-
+$(document).ready(function () {
+  "use strict";
+  $("#test1").hover(
+      function () {
+          $('.modal').modal({
+              show: true
+          });
+      },
+      function () {
+          $('.modal').modal('hide');
+      });
+});
 
 
 
