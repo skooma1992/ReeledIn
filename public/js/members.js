@@ -3,13 +3,16 @@ $(document).ready(function() {
   // and updates the HTML on the page
   var profilePicDiv = document.querySelectorAll('#small-blank-avatar');
   var postInput = $("#post-input");
+  var postDiv = $("#post-div");
+  var posts;
+  var id;
 
 
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(data.email);
     console.log(data.email)
 
-    let id = data.id;
+   id = data.id;
 
     $.get("/api/users/" + id).then(function(data) {
   
@@ -50,14 +53,18 @@ $(document).ready(function() {
 
 // working on post function
 //////////////////////////////////////////////////////////////////////////////
+
+
+
   
     });
 
 
 
   });
-
   
+  
+
 
   
 });
