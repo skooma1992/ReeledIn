@@ -13,9 +13,8 @@ module.exports = function (sequelize, DataTypes) {
             len: [1, 480]
         },
         user_id: {
-            type: DataTypes.TEXT,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            len: [1, 480]
         },
         length: {
             type: DataTypes.DECIMAL,
@@ -29,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
 
     Post.associate = function (models) {
 
-        Post.belongsTo(models.user, {
+        Post.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }

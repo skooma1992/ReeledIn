@@ -7,6 +7,7 @@ $(document).ready(function() {
   var posts;
   var id;
 
+
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(data.email);
     console.log(data.email);
@@ -32,13 +33,19 @@ $(document).ready(function() {
 
       $("#post-button").click(function() {
         let body = postInput.val().trim();
-
+        var location = $("#locationSelect").val().trim();
+        var length = $("#inputLength").val().trim();
+        var weight = $("#inputWeight").val().trim();
         console.log(body + id);
         postInput.val("");
 
         $.post("/api/post", {
-          body: body,
-          author_id: id,
+          message: body,
+          user_id: id,
+          length: length,
+          weight: weight,
+          location: location,
+          UserId: id,
         })
           .then(function(data) {
             console.log(data);
@@ -50,14 +57,23 @@ $(document).ready(function() {
           });
       });
 
-      // working on post function
+      // working on page load posts 
+
+      $.get("/api/post").then(function(data){
+        console.log(data)
+
+      })
+
+
+
+
+
+
       //////////////////////////////////////////////////////////////////////////////
     });
   });
-});
 
-$(document).ready(function() {
-  "use strict";
+
   $("#test1").hover(
     function() {
       $(".modal").modal({
@@ -68,4 +84,6 @@ $(document).ready(function() {
       $(".modal").modal("hide");
     }
   );
+
 });
+
