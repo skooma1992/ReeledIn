@@ -12,6 +12,11 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             len: [1, 480]
         },
+        user_id: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+            len: [1, 480]
+        },
         length: {
             type: DataTypes.DECIMAL,
             allowNull: true,

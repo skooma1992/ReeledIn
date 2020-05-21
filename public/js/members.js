@@ -23,6 +23,17 @@ $(document).ready(function() {
         
         console.log("this is your profile_pic url:" + data.profile_pic)
       }
+// Adding all fish names to the modal
+      $.get("/api/checkFish").then(function(res){
+        console.log(res)
+        res.forEach(function(fish){
+          $("#fishNameSelect").append(`<option>${fish.species}</option>`)
+        })
+      })
+
+
+
+
 // working on post function
 //////////////////////////////////////////////////////////////////////////////
 

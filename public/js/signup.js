@@ -42,7 +42,6 @@ $(document).ready(function() {
 });
 
 // Adding all fish to database if not there
-
 $.get("/api/checkFish").then(function(res){
   console.log(res)
   if (res.length === 0) {
@@ -63,14 +62,5 @@ $.get("/api/checkFish").then(function(res){
           console.log(response)
         })
       });
-
-
-    // $("#fish-info").on("click", function(event) {
-    //   // event.preventDefault();
-    //   var fish = $("#fish-input").val().toLowerCase();
-    // //   console.log(allFish[0]["Species Name"]);
-    //   var fishResults = allFish.filter(fishObj => fishObj["Species Name"].toLowerCase().includes(fish))
-    //   console.log(fishResults);
-    // });
   }
 })
