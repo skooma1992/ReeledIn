@@ -111,19 +111,22 @@ textarea, select, input, button { outline: none; }
   font-size: 15px;
   border-radius: 5px;
 }
-
-#post-button {
-  border: none;
-  margin-top: 20px;
-  background-color: #ff5e00;
-  color: white;
-  padding: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  text-transform: lowercase;
-  font-size: 15px;
-  border-radius: 5px;
+.ree-pic{
+  margin-left: 100px;
 }
+/* #post-button {
+  border: none;
+  /* margin-top: 20px; */
+  /* background-color: #ff5e00;
+  color: white; */
+  /* padding: 5px;  */
+  /* padding-left: 10px;
+  padding-right: 10px; 
+  padding-bottom: 10px; */ */
+  /* text-transform: lowercase; */
+  /* font-size: 15px;  */
+  /* border-radius: 5px;
+}  */ 
 
 #post-button:hover {
   background-color: #ff5e00a6;
