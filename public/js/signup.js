@@ -40,3 +40,37 @@ $(document).ready(function() {
     $("#alert").fadeIn(500);
   }
 });
+
+// Adding all fish to database if not there
+
+$.get("/api/checkFish").then(function(res){
+  console.log(res)
+  if (res.length === 0) {
+    var allFish;
+    var queryURL = "https://www.fishwatch.gov/api/species/";
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+        console.log(response);
+        allFish = response.map(fish => fish = {
+          species: fish["Species Name"],
+          photo: fish["Species Illustration Photo"].src,
+          quote: fish["Quote"],
+        });
+        console.log(allFish)
+        $.post("/api/checkFish", {fish:allFish}, function(response){
+          console.log(response)
+        })
+      });
+
+
+    // $("#fish-info").on("click", function(event) {
+    //   // event.preventDefault();
+    //   var fish = $("#fish-input").val().toLowerCase();
+    // //   console.log(allFish[0]["Species Name"]);
+    //   var fishResults = allFish.filter(fishObj => fishObj["Species Name"].toLowerCase().includes(fish))
+    //   console.log(fishResults);
+    // });
+  }
+})

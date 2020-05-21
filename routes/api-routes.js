@@ -52,7 +52,24 @@ module.exports = function(app) {
       });
     }
   });
-
+// Api is for adding fish to database, if not there
+  app.get("/api/checkFish", function (req, res){
+    db.Fish.findAll({}).then(function(data){
+      res.send(data)
+    })
+  })
+  app.post("/api/checkFish", function(req, res) {
+    console.log(req)
+    db.Fish.bulkCreate(
+      req.body.fish
+    )
+      .then(function() {
+        console.log("All fish added");
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
 /****************************************************************************************** */
 /****************************************************************************************** */
 /****************************************************************************************** */
@@ -80,7 +97,7 @@ db.User.update(
 
 });
 
-   
+
 
 /****************************************************************************************** */
 /****************************************************************************************** */

@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1, 255]
             }
         },
-        biology: {
+        quote: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
