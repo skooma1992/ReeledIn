@@ -1,21 +1,25 @@
 module.exports = function (sequelize, DataTypes) {
     var Fish = sequelize.define("Fish", {
-        Species: {
+        species: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1]
+                len: [1, 255]
             }
         },
-        Length: {
-            type: DataTypes.STRING ,
-            allowNull: true,
-            len: [1]
+        photo: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         },
-        Weight: {
-            type: DataTypes.STRING ,
-            allowNull: true,
-            len: [1]
+        quote: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         }
     });
 

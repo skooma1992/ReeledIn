@@ -16,10 +16,6 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    profile_pic: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   });
    

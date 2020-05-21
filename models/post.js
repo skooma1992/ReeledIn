@@ -1,33 +1,40 @@
 module.exports = function (sequelize, DataTypes) {
     var Post = sequelize.define("Post", {
-        body: {
-            type: DataTypes.TEXT,
+        location: {
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1]
+                len: [1, 255]
             }
         },
-        author_id: {
-            type: DataTypes.INTEGER,
+        message: {
+            type: DataTypes.TEXT,
             allowNull: false,
-            validate: {
-                len: [1]
-            }
+            len: [1, 480]
+        },
+        user_id: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+            len: [1, 480]
+        },
+        length: {
+            type: DataTypes.DECIMAL,
+            allowNull: true,
+        },
+        weight: {
+            type: DataTypes.DECIMAL ,
+            allowNull: true,
         }
     });
 
-    Post.associate = models => {
-        Post.belongsTo(models.User, {foreignKey: 'author_id'});
-      
-        }
-    // Post.associate = function (models) {
+    Post.associate = function (models) {
 
-    //     Post.belongsTo(models.user, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
+        Post.belongsTo(models.user, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
     return Post;
 };
