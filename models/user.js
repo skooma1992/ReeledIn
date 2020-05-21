@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
   
   User.associate = models => {
   User.hasMany(models.Post, {
-    foreignKey: 'author_id',
+    foreignKey: 'user_id',
     onDelete: "cascade"
   });
 

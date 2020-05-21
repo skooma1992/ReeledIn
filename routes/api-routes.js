@@ -130,7 +130,7 @@ app.get("/api/users/:id", function(req, res) {
 app.post("/api/post", function(req, res) {
   db.Post.create({
     body: req.body.body,
-    author_id: req.body.author_id
+    user_id: req.body.user_id
   })
     .then(function() {
       console.log("You've succesfully added a post");
@@ -142,6 +142,10 @@ app.post("/api/post", function(req, res) {
 
 
 app.get("/api/post", function(req, res) {
+  var query = {};
+    if (req.query.user_id) {
+      query.UserId = req.query.user_id;
+    }
   db.Post.findAll({
     include: [db.User]
   })
@@ -154,7 +158,7 @@ app.get("/api/post/:id", function(req, res) {
   db.Post.findAll({
     include: [db.User],
     where: {
-      author_id: req.params.id
+      user_id: req.params.id
     }
   })
     .then(function(dbPost) {
@@ -162,7 +166,11 @@ app.get("/api/post/:id", function(req, res) {
     });
 });
 
-
+app.post("/api/post", function(req, res) {
+  db.Post.create(req.body).then(function(dbPost) {
+    res.json(dbPost);
+  });
+});
 
 
 
