@@ -36,6 +36,7 @@ $(document).ready(function() {
         var location = $("#locationSelect").val().trim();
         var length = $("#inputLength").val().trim();
         var weight = $("#inputWeight").val().trim();
+        var species = $("#fishNameSelect").val().trim();
         console.log(body + id);
         postInput.val("");
 
@@ -46,6 +47,7 @@ $(document).ready(function() {
           weight: weight,
           location: location,
           UserId: id,
+          species: species,
         })
           .then(function(data) {
             console.log(data);
@@ -61,7 +63,18 @@ $(document).ready(function() {
 
       $.get("/api/post").then(function(data){
         console.log(data)
-
+        data.forEach(function(fish) {
+          $("#post-div").append(`      <div class="card text-dark" style="width: 90%; margin:auto;">
+          <div class="card-body">
+            <h5 class="card-title">${id} Post</h5>
+            <img id="small-blank-avatar" class="post-avatar reel-pic ml-3" src="./img/blank-profile.png" alt="Profile Pic">
+            <p class="card-text">"User" caught a ${fish.species} on the ocean</p>
+            <p class="card-text">It was ${fish.length} inches long and weighed ${fish.weight} lbs.</p>
+            <p class="card-text">${fish.message}</p>
+            <a href="#" class="card-link">Map</a>
+          </div>
+        </div>`);
+        });
       })
 
 
