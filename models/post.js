@@ -23,7 +23,8 @@ module.exports = function (sequelize, DataTypes) {
         weight: {
             type: DataTypes.DECIMAL ,
             allowNull: true,
-        },species: {
+        },
+        species: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
