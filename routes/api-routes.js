@@ -2,8 +2,6 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
-
-
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -50,11 +48,28 @@ module.exports = function(app) {
         email: req.user.email,
         id: req.user.id,
         profile_pic: req.user.profile_pic
-
       });
     }
   });
 
+// Api is for adding fish to database, if not there
+  app.get("/api/checkFish", function (req, res){
+    db.Fish.findAll({}).then(function(data){
+      res.send(data)
+    })
+  })
+  app.post("/api/checkFish", function(req, res) {
+    console.log(req)
+    db.Fish.bulkCreate(
+      req.body.fish
+    )
+      .then(function() {
+        console.log("All fish added");
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
 /****************************************************************************************** */
 /****************************************************************************************** */
 /****************************************************************************************** */
@@ -76,18 +91,94 @@ db.User.update(
     id: req.body.id   
   }
 })
-.then(function() {
-  res.redirect(307, "/members");
-})
 .catch(function(err) {
   res.status(401).json(err);
 });
 
 });
 
-   
+
 
 /****************************************************************************************** */
 /****************************************************************************************** */
 /****************************************************************************************** */
+
+
+
+app.get("/api/users/", function(req, res) {
+  db.User.findAll({})
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+
+app.get("/api/users/:id", function(req, res) {
+  db.User.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+// working on post api
+//////////////////////////////////////////////////////////////////////////////
+
+// app.post("/api/post", function(req, res) {
+//   console.log(req.body)
+//   db.Post.create({
+//     message: req.body.body,
+//     user_id: parseInt(req.body.user_id),
+//     location: req.body.location,
+//     length: parseFloat(req.body.length),
+//     weight: parseFloat(req.body.weight),
+
+//   })
+//     .then(function() {
+//       console.log("You've succesfully added a post");
+//     })
+//     .catch(function(err) {
+//       res.status(401).json(err);
+//     });
+// });
+
+
+app.get("/api/post", function(req, res) {
+  db.Post.findAll({
+    include: [db.User]
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+app.get("/api/post/:id", function(req, res) {
+  db.Post.findAll({
+    include: [db.User],
+    where: {
+      user_id: req.params.id
+    }
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+// working on post api
+//////////////////////////////////////////////////////////////////////////////
+app.post("/api/post", function(req, res) {
+  db.Post.create(req.body).then(function(dbPost) {
+    res.json(dbPost);
+  });
+});
+
+// app.get("/api/post", function(req,res){
+//   db.Post.findAll({}).then(function(dbPost){
+//     res.json(dbPost);
+//   })
+// })
+
 };
