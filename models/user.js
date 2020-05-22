@@ -16,13 +16,17 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    profile_pic: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   });
    
   
   User.associate = models => {
   User.hasMany(models.Post, {
-    foreignKey: 'author_id',
+    foreignKey: 'user_id',
     onDelete: "cascade"
   });
 
