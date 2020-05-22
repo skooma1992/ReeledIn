@@ -55,6 +55,15 @@ module.exports = function(app) {
     }
   });
 
+  app.get("/api/map", (req, res) => {
+    db.Image.findAndCountAll({}).then(dbImages => {
+        var numMarker = dbImages.count;
+        var info = dbImages.rows; // all the information as an array I believe
+        console.log(`\n${numMarker} markers found! \n`);
+        res.json(info);
+    });
+});
+
 /****************************************************************************************** */
 /****************************************************************************************** */
 /****************************************************************************************** */
