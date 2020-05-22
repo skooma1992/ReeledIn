@@ -3,8 +3,8 @@ $(document).ready(function() {
   // and updates the HTML on the page
   var profilePicDiv = document.querySelectorAll("#small-blank-avatar");
   var postInput = $("#post-input");
-  var postDiv = $("#post-div");
-  var posts;
+  // var postDiv = $("#post-div");
+  // var posts;
   var id;
 
 
