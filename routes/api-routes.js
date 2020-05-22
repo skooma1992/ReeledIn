@@ -147,10 +147,6 @@ app.get("/api/users/:id", function(req, res) {
 
 
 app.get("/api/post", function(req, res) {
-  var query = {};
-    if (req.query.user_id) {
-      query.UserId = req.query.user_id;
-    }
   db.Post.findAll({
     include: [db.User]
   })
