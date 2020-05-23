@@ -86,9 +86,9 @@ $(document).ready(function() {
             <img id="small-blank-avatar" class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic} alt="Profile Pic">
             <p class="card-text"><strong>${fish.User.email}</strong> caught a <span class="postion-relative"><span class="fish-span" data-target="post-${fish.id}">${fish.species}</span> at ${fish.location} <div class="card d-none fish-post-card position-absolute" id="post-${fish.id}" style="width: 18rem;">
             <!-- <img src="..." class="card-img-top" alt="..."> -->
-            <div class="card-body">
-              <h5 class="card-title">${fish.species}</h5>
-              <p class="card-text"><img src=${thisFish[0].photo} style="width:80%"> 
+            <div class="card-body shadow-lg">
+              <h5 class="card-title text-light">${fish.species}</h5>
+              <p class="card-text text-light"><img src=${thisFish[0].photo} style="width:80%"> 
               <br>
               <br>
               ${thisFish[0].quote}
@@ -98,6 +98,7 @@ $(document).ready(function() {
           </div> </span></p>
             <p class="card-text">It was ${fish.length} inches long and weighed ${fish.weight} lbs.</p>
             <p class="card-text">${fish.message}</p>
+            <p class="card-text" id="time-stamp">${fish.User.createdAt}</p>
             <a href="#" class="card-link">Map</a>
           </div>
         </div>`);
@@ -117,4 +118,9 @@ $(document).ready(function() {
       $("#" + target).addClass("d-none")
   })
 
+  // $("#time-stamp").text(
+  //   moment()
+  //     .format("LLLL")
+  //     .slice(0, -8)
+  // );
 });
