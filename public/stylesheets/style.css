@@ -274,6 +274,8 @@ button {
   border: none;
   margin-left: 10px;
   border-radius: 5px;
+  position: relative;
+  top: -36px;
 }
 
 #cancel-tag {
@@ -325,4 +327,8 @@ button {
   left: 0px;
   z-index: 500;
   background-image: linear-gradient( #17362a,#6b8c99, #6b8c99)
+}
+.time-stamp{
+  color: rgb(100, 126, 197);
+  font-size: small;
 }

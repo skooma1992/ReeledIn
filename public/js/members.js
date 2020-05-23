@@ -65,6 +65,7 @@ $(document).ready(function() {
         })
           .then(function(data) {
             console.log(data);
+            reloadPage();
 
             // If there's an error, handle it by throwing up a bootstrap alert
           })
@@ -79,9 +80,22 @@ $(document).ready(function() {
         console.log(data);
         data.forEach(function(fish) {
           var thisFish = allFish.filter(currentFish => currentFish.species === fish.species) 
+          var time = fish.createdAt;
+          var postDate = fish.createdAt.slice(0, 10).split("-");
+          var postTime = fish.createdAt.slice(11, 16).split(":");
+          var postYear = postDate[0]
+          postDate.shift()
+          postDate.push(postYear)
+          postDate = postDate.join("/")
+          postTime[0] = parseInt(postTime[0]) -4
+          postTime = postTime.join(":")
+          time = postDate + " at " + postTime
+          console.log(postDate)
+          console.log(postTime)
+
           $(
             "#post-div"
-          ).append(`      <div class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
+          ).prepend(`      <div class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
           <div class="card-body">
             <img id="small-blank-avatar" class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic} alt="Profile Pic">
             <p class="card-text"><strong>${fish.User.email}</strong> caught a <span class="postion-relative"><span class="fish-span" data-target="post-${fish.id}">${fish.species}</span> at ${fish.location} <div class="card d-none fish-post-card position-absolute" id="post-${fish.id}" style="width: 18rem;">
@@ -98,7 +112,7 @@ $(document).ready(function() {
           </div> </span></p>
             <p class="card-text">It was ${fish.length} inches long and weighed ${fish.weight} lbs.</p>
             <p class="card-text">${fish.message}</p>
-            <p class="card-text" id="time-stamp">${fish.User.createdAt}</p>
+            <p class="card-tex time-stamp">${time}</p>
             <a href="#" class="card-link">Map</a>
           </div>
         </div>`);
@@ -117,10 +131,8 @@ $(document).ready(function() {
     var target = $(this).attr("data-target")
       $("#" + target).addClass("d-none")
   })
-
-  // $("#time-stamp").text(
-  //   moment()
-  //     .format("LLLL")
-  //     .slice(0, -8)
-  // );
+  
 });
+function reloadPage(){
+  location.reload();
+}
