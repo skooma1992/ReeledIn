@@ -1,35 +1,35 @@
 // Requiring necessary npm packages
 var express = require("express");
 var session = require("express-session");
-const request = require('request');
+// const request = require('request');
 // Requiring passport as we've configured it
 var passport = require("./config/passport");
 
 var app = express();
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://www.fishwatch.gov/api/species/"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  // res.header('Access-Control-Allow-Origin', '*');
+  // res.header("Access-Control-Allow-Origin", "https://www.fishwatch.gov/api/species/"); // update to match the domain you will make the request from
+  // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
   next();
 });
 
-app.get('/api/species', (req, res, next) => {
-  request(
-    { url: 'https://www.fishwatch.gov/api/species/' },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: err.message });
-      }
+// app.get('/api/species', (req, res, next) => {
+//   request(
+//     { url: 'https://www.fishwatch.gov/api/species/' },
+//     (error, response, body) => {
+//       if (error || response.statusCode !== 200) {
+//         return res.status(500).json({ type: 'error', message: err.message });
+//       }
 
-      res.json(JSON.parse(body));
-    }
-  )
-  next();
-});
-app.post('/', function(req, res, next) {
-  // Handle the post for this route
- });
+//       res.json(JSON.parse(body));
+//     }
+//   )
+//   next();
+// });
+// app.post('/', function(req, res, next) {
+//   // Handle the post for this route
+//  });
 
 // Setting up port and requiring models for syncing
 var PORT = process.env.PORT || 8080;

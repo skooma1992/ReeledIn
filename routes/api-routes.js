@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+var axios = require("axios");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -55,19 +56,43 @@ module.exports = function(app) {
   // Api is for adding fish to database, if not there
   app.get("/api/checkFish", function(req, res) {
     db.Fish.findAll({}).then(function(data) {
-      res.send(data);
+      if (data.length) res.send(data);
+      else {
+          var allFish;
+          var queryURL = "https://www.fishwatch.gov/api/species/";
+          axios.get(queryURL).then(function(response) {
+              console.log(response.data);
+              // response = JSON.parse(response.data);
+              allFish = response.data.map(fish => fish = {
+                species: fish["Species Name"],
+                photo: fish["Species Illustration Photo"].src,
+                quote: fish["Quote"],
+              });
+              console.log(allFish)
+              db.Fish.bulkCreate(allFish)
+              .then(function() {
+                console.log("All fish added");
+                res.send();
+              })
+              .catch(function(err) {
+                res.status(401).json(err);
+              });
+        
+            });
+
+      }
     });
   });
-  app.post("/api/checkFish", function(req, res) {
-    console.log(req);
-    db.Fish.bulkCreate(req.body.fish)
-      .then(function() {
-        console.log("All fish added");
-      })
-      .catch(function(err) {
-        res.status(401).json(err);
-      });
-  });
+  // app.post("/api/checkFish", function(req, res) {
+  //   console.log(req);
+  //   db.Fish.bulkCreate(req.body.fish)
+  //     .then(function() {
+  //       console.log("All fish added");
+  //     })
+  //     .catch(function(err) {
+  //       res.status(401).json(err);
+  //     });
+  // });
   /****************************************************************************************** */
   /****************************************************************************************** */
   /****************************************************************************************** */
