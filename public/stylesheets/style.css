@@ -2,6 +2,15 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+body {
+  background: url(../img/kayak2.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
 
 /* Main Styling */
 

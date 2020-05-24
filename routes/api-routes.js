@@ -52,7 +52,6 @@ module.exports = function(app) {
     }
   });
 
-<<<<<<< HEAD
   app.get("/api/map", (req, res) => {
     db.Image.findAndCountAll({}).then(dbImages => {
         var numMarker = dbImages.count;
@@ -62,7 +61,6 @@ module.exports = function(app) {
     });
 });
 
-=======
 // Api is for adding fish to database, if not there
   app.get("/api/checkFish", function (req, res){
     db.Fish.findAll({}).then(function(data){
@@ -81,7 +79,6 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
->>>>>>> b96ec1fd6dd45830d866b5dcaa2fcfab3ff04efa
 /****************************************************************************************** */
 /****************************************************************************************** */
 /****************************************************************************************** */

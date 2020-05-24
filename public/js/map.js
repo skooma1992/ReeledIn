@@ -68,26 +68,5 @@ markerBtn.addEventListener("click", function() {
 }
 
 
-function imageSubmit(e) {
-  e.preventDefault();
-      var form = $("#file")[0];
-      var data = new FormData(form);
-      data.append("lat", lat); //adds the lat and long to the form
-      data.append("long", long);
-
-      $.ajax({
-          type: "POST",
-          url: "/api/upload",
-          data: data,
-          processData: false,
-          contentType: false,
-          cache: false,
-          timeout: 600000,
-          success: function(data) {
-            console.log(data)
-          },
-        
-      });
-  }
 
 $submitBtn.on("click", imageSubmit);
