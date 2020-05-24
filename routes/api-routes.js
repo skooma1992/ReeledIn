@@ -190,4 +190,22 @@ module.exports = function(app) {
   //     res.json(dbPost);
   //   })
   // })
+  app.post("/api/user-info", function(req, res) {
+    console.log(req.body);
+    db.User.update(
+      {
+        user_name: req.body.user_name,
+        city: req.body.city,
+        bio: req.body.bio,
+      },
+      {
+        where: {id: req.body.id}
+      }
+    ).then(function(rowsUpdated) {
+      res.redirect("/")
+    })
+  });
+
+
+
 };

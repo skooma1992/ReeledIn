@@ -79,19 +79,21 @@ $(document).ready(function() {
       $.get("/api/post").then(function(data) {
         console.log(data);
         data.forEach(function(fish) {
-          var thisFish = allFish.filter(currentFish => currentFish.species === fish.species) 
+          var thisFish = allFish.filter(
+            (currentFish) => currentFish.species === fish.species
+          );
           var time = fish.createdAt;
           var postDate = fish.createdAt.slice(0, 10).split("-");
           var postTime = fish.createdAt.slice(11, 16).split(":");
-          var postYear = postDate[0]
-          postDate.shift()
-          postDate.push(postYear)
-          postDate = postDate.join("/")
-          postTime[0] = parseInt(postTime[0]) -4
-          postTime = postTime.join(":")
-          time = postDate + " at " + postTime
-          console.log(postDate)
-          console.log(postTime)
+          var postYear = postDate[0];
+          postDate.shift();
+          postDate.push(postYear);
+          postDate = postDate.join("/");
+          postTime[0] = parseInt(postTime[0]) - 4;
+          postTime = postTime.join(":");
+          time = postDate + " at " + postTime;
+          console.log(postDate);
+          console.log(postTime);
 
           $(
             "#post-div"
@@ -123,16 +125,15 @@ $(document).ready(function() {
     });
   });
 
-  $("#post-div").on("mouseover", ".fish-span", function(){
-    var target = $(this).attr("data-target")
-      $("#" + target).removeClass("d-none")
-  })
-  $("#post-div").on("mouseleave", ".fish-span", function(){
-    var target = $(this).attr("data-target")
-      $("#" + target).addClass("d-none")
-  })
-  
+  $("#post-div").on("mouseover", ".fish-span", function() {
+    var target = $(this).attr("data-target");
+    $("#" + target).removeClass("d-none");
+  });
+  $("#post-div").on("mouseleave", ".fish-span", function() {
+    var target = $(this).attr("data-target");
+    $("#" + target).addClass("d-none");
+  });
 });
-function reloadPage(){
+function reloadPage() {
   location.reload();
 }
