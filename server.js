@@ -7,12 +7,14 @@ var passport = require("./config/passport");
 
 var app = express();
 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   next();
-// });
+app.use((req, res, next) => {
+  // res.header("Access-Control-Allow-Origin", "https://www.fishwatch.gov/api/species/"); // update to match the domain you will make the request from
+  // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
-// app.get('/api/species', (req, res) => {
+// app.get('/api/species', (req, res, next) => {
 //   request(
 //     { url: 'https://www.fishwatch.gov/api/species/' },
 //     (error, response, body) => {
@@ -23,7 +25,11 @@ var app = express();
 //       res.json(JSON.parse(body));
 //     }
 //   )
+//   next();
 // });
+// app.post('/', function(req, res, next) {
+//   // Handle the post for this route
+//  });
 
 // Setting up port and requiring models for syncing
 var PORT = process.env.PORT || 8080;
@@ -46,7 +52,11 @@ require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
 
 // Syncing our database and logging a message to the user upon success
+<<<<<<< HEAD
 db.sequelize.sync({}).then(function() {
+=======
+db.sequelize.sync().then(function() {
+>>>>>>> 459dc28665e94940c72dd5c5798b5a901028e32e
   app.listen(PORT, function() {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
