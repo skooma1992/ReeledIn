@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+var axios = require("axios");
+var moment = require("moment");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -10,7 +12,7 @@ module.exports = function(app) {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
-      id: req.user.id
+      id: req.user.id,
     });
   });
 
@@ -20,7 +22,7 @@ module.exports = function(app) {
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -47,138 +49,145 @@ module.exports = function(app) {
       res.json({
         email: req.user.email,
         id: req.user.id,
-        profile_pic: req.user.profile_pic
+        profile_pic: req.user.profile_pic,
       });
     }
   });
 
-// Api is for adding fish to database, if not there
-  app.get("/api/checkFish", function (req, res){
-    db.Fish.findAll({}).then(function(data){
-      res.send(data)
-    })
-  })
-  app.post("/api/checkFish", function(req, res) {
-    console.log(req)
-    db.Fish.bulkCreate(
-      req.body.fish
-    )
-      .then(function() {
-        console.log("All fish added");
-      })
-      .catch(function(err) {
-        res.status(401).json(err);
-      });
+  // Api is for adding fish to database, if not there
+  app.get("/api/checkFish", function(req, res) {
+    db.Fish.findAll({}).then(function(data) {
+      if (data.length) res.send(data);
+      else {
+          var allFish;
+          var queryURL = "https://www.fishwatch.gov/api/species/";
+          axios.get(queryURL).then(function(response) {
+              console.log(response.data);
+              // response = JSON.parse(response.data);
+              allFish = response.data.map(fish => fish = {
+                species: fish["Species Name"],
+                photo: fish["Species Illustration Photo"].src,
+                quote: fish["Quote"],
+              });
+              console.log(allFish)
+              db.Fish.bulkCreate(allFish)
+              .then(function() {
+                console.log("All fish added");
+                res.send();
+              })
+              .catch(function(err) {
+                res.status(401).json(err);
+              });
+        
+            });
+
+      }
+    });
   });
-/****************************************************************************************** */
-/****************************************************************************************** */
-/****************************************************************************************** */
+  // app.post("/api/checkFish", function(req, res) {
+  //   console.log(req);
+  //   db.Fish.bulkCreate(req.body.fish)
+  //     .then(function() {
+  //       console.log("All fish added");
+  //     })
+  //     .catch(function(err) {
+  //       res.status(401).json(err);
+  //     });
+  // });
+  /****************************************************************************************** */
+  /****************************************************************************************** */
+  /****************************************************************************************** */
 
-//Trying to UPDATE post SET profile_pic = req.body WHERE id = req.params.id;
+  //Trying to UPDATE post SET profile_pic = req.body WHERE id = req.params.id;
 
-app.put("/api/user_data", function(req, res) {
+  app.put("/api/user_data", function(req, res) {
+    console.log(req.body.url);
 
-
-  console.log(req.body.url);
-
-db.User.update(
-  {
-  profile_pic: req.body.url,
-}, 
-{
-  where: 
-  {
-    id: req.body.id   
-  }
-})
-.catch(function(err) {
-  res.status(401).json(err);
-});
-
-});
-
-
-
-/****************************************************************************************** */
-/****************************************************************************************** */
-/****************************************************************************************** */
-
-
-
-app.get("/api/users/", function(req, res) {
-  db.User.findAll({})
-    .then(function(dbPost) {
-      res.json(dbPost);
+    db.User.update(
+      {
+        profile_pic: req.body.url,
+      },
+      {
+        where: {
+          id: req.body.id,
+        },
+      }
+    ).catch(function(err) {
+      res.status(401).json(err);
     });
-});
-
-
-app.get("/api/users/:id", function(req, res) {
-  db.User.findOne({
-    where: {
-      id: req.params.id
-    }
-  })
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
-});
-
-// working on post api
-//////////////////////////////////////////////////////////////////////////////
-
-// app.post("/api/post", function(req, res) {
-//   console.log(req.body)
-//   db.Post.create({
-//     message: req.body.body,
-//     user_id: parseInt(req.body.user_id),
-//     location: req.body.location,
-//     length: parseFloat(req.body.length),
-//     weight: parseFloat(req.body.weight),
-
-//   })
-//     .then(function() {
-//       console.log("You've succesfully added a post");
-//     })
-//     .catch(function(err) {
-//       res.status(401).json(err);
-//     });
-// });
-
-
-app.get("/api/post", function(req, res) {
-  db.Post.findAll({
-    include: [db.User]
-  })
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
-});
-
-app.get("/api/post/:id", function(req, res) {
-  db.Post.findAll({
-    include: [db.User],
-    where: {
-      user_id: req.params.id
-    }
-  })
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
-});
-
-// working on post api
-//////////////////////////////////////////////////////////////////////////////
-app.post("/api/post", function(req, res) {
-  db.Post.create(req.body).then(function(dbPost) {
-    res.json(dbPost);
   });
-});
 
-// app.get("/api/post", function(req,res){
-//   db.Post.findAll({}).then(function(dbPost){
-//     res.json(dbPost);
-//   })
-// })
+  /****************************************************************************************** */
+  /****************************************************************************************** */
+  /****************************************************************************************** */
 
+  app.get("/api/users/", function(req, res) {
+    db.User.findAll({}).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  app.get("/api/users/:id", function(req, res) {
+    db.User.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // working on post api
+  //////////////////////////////////////////////////////////////////////////////
+
+  // app.post("/api/post", function(req, res) {
+  //   console.log(req.body)
+  //   db.Post.create({
+  //     message: req.body.body,
+  //     user_id: parseInt(req.body.user_id),
+  //     location: req.body.location,
+  //     length: parseFloat(req.body.length),
+  //     weight: parseFloat(req.body.weight),
+
+  //   })
+  //     .then(function() {
+  //       console.log("You've succesfully added a post");
+  //     })
+  //     .catch(function(err) {
+  //       res.status(401).json(err);
+  //     });
+  // });
+
+  app.get("/api/post", function(req, res) {
+    db.Post.findAll({
+      include: [db.User],
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  app.get("/api/post/:id", function(req, res) {
+    db.Post.findAll({
+      include: [db.User],
+      where: {
+        user_id: req.params.id,
+      },
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // working on post api
+  //////////////////////////////////////////////////////////////////////////////
+  app.post("/api/post", function(req, res) {
+    db.Post.create(req.body).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // app.get("/api/post", function(req,res){
+  //   db.Post.findAll({}).then(function(dbPost){
+  //     res.json(dbPost);
+  //   })
+  // })
 };

@@ -43,24 +43,5 @@ $(document).ready(function() {
 
 // Adding all fish to database if not there
 $.get("/api/checkFish").then(function(res){
-  console.log(res)
-  if (res.length === 0) {
-    var allFish;
-    var queryURL = "https://www.fishwatch.gov/api/species/";
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-        console.log(response);
-        allFish = response.map(fish => fish = {
-          species: fish["Species Name"],
-          photo: fish["Species Illustration Photo"].src,
-          quote: fish["Quote"],
-        });
-        console.log(allFish)
-        $.post("/api/checkFish", {fish:allFish}, function(response){
-          console.log(response)
-        })
-      });
-  }
+  console.log(res);
 })
