@@ -5,7 +5,8 @@
 var pos;
 var map, infoWindow;
 var markers = [];
-var locations = []
+var locations = [];
+const infowindows = [];
 
 const markerBtn = document.getElementById("markerBtn");
 
@@ -16,23 +17,18 @@ function fuckAmarker() {
             let newLocation = { lat: Number(location.lat), lng: Number(location.lng) }
             //console.log(location.lat + location.lng + 'trying it out')
             locations.push(newLocation)
+            addMarker(newLocation, location.name, location.info)
         });
-        console.log(locations, "this another location")
     });
-    setMapOnAllLocations(newLocation)
-
-
 }
-fuckAmarker()
-console.log(locations, 'look at loc')
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 37.5407, lng: -77.4360 },
         zoom: 6
     });
+    fuckAmarker();
 
-    setMapOnAllLocations(locations);
     infoWindow = new google.maps.InfoWindow;
     // This event listener will call addMarker() when the map is clicked.
     map.addListener('click', function (mapsMouseEvent) {
@@ -85,17 +81,35 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
 //addMarker(locations[0]);
 // Adds a marker to the map and push to the array.
-function addMarker(location) {
+function addMarker(location, name, info) {
+    let contentString = '<div id="content">'+
+'<div id="siteNotice">'+
+'</div>'+
+'<h4 id="firstHeading" class="firstHeading">' + name + '</h4>'+
+'<div id="bodyContent">'+
+'<p>' + info + '</p>'+
+'</div>'+
+'</div>';
+
+const infowindow = new google.maps.InfoWindow({
+    content: contentString
+    });
+
     var marker = new google.maps.Marker({
         position: location,
         map: map,
         animation: google.maps.Animation.DROP
     });
+    marker.addListener("click", function() {
+        infowindow.open(map, marker)
+    });
     markers.push(marker);
     showMarkers();
 }
+
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
     for (var i = 0; i < markers.length; i++) {
