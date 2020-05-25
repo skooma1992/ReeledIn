@@ -213,4 +213,26 @@ module.exports = function(app) {
 
 
 
-};
+app.post("/api/location", function(req, res) {
+  db.Location.create({
+    name: req.body.name,
+    info: req.body.info,
+    lat: req.body.lat,
+    lng: req.body.lng
+  }).then(function(dbLocation) {
+    console.log(dbLocation);
+  });
+});
+
+app.get("/api/location", function(req, res) {
+  db.Location.findAll({
+    
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+
+}
+
