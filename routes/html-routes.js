@@ -41,5 +41,9 @@ module.exports = function(app) {
   app.get("/mapPoint", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/mapPoint.html"));
   });
+  
+  app.get("/user_id/:id", function(req, res){
+    res.sendFile(path.join(__dirname, "../public/profile.html"))
+  })
 
 };
