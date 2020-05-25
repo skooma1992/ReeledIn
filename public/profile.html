@@ -2,35 +2,22 @@
 <html lang="en">
   <head>
     <title>ReeledIn Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <link href="stylesheets/style.css" rel="stylesheet" />
-    <link href="stylesheets/style.css" rel="stylesheet" />
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="./img/reeledin-favicon2.png"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <link href="../stylesheets/style.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="../img/reeledin-favicon2.png">
+  
+  
   </head>
 
   <body id="main-body">
     <nav id="my-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/members"
-        ><img id="navbar-logo" src="img/reeledin-logo.png" alt="ReeledIn"
+        ><img id="navbar-logo" src="../img/reeledin-logo.png" alt="ReeledIn"
       /></a>
       <button
         class="navbar-toggler"
@@ -80,7 +67,7 @@
               <span class="member-name"></span>
               <img
                 id="small-blank-avatar"
-                src="./img/blank-profile.png"
+                src="../img/blank-profile.png"
                 alt="Profile Pic"
               />
             </a>
@@ -103,7 +90,7 @@
     <br />
     <div class="container">
       <div class="jumbotron text-dark">
-        <h1 class="display-4">Reel, world!</h1>
+        <h1 id="user_name" class="display-4"></h1>
         <div class="card shadow-lg">
           <div class="card-body">
             <div class="row">
@@ -115,27 +102,25 @@
                     alt="..."
                   />
                   <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <img
-                      src="https://i.picsum.photos/id/654/75/75.jpg"
-                      alt="..."
-                      class="rounded-circle"
-                    />
+                    <h4  class="card-title">Profile</h4>
+                    <img id="profile_pic" src="../img/blank-profile.png" alt="Profile Pic">
+
                     <p class="card-text">
-                      <h5>Bio, hobbies, interests</h5>
+                      <h5>Bio, Hobbies, Interests</h5>
                     </p>
+                    <p id="bio"></p>
                     <a href="#" class="btn btn-primary">Edit Profile</a>
                   </div>
                 </div>
               </div>
               <div class="col-sm-8">
                 <div class="card shadow-lg">
-                  <div class="card-header text-center">
+                  <div class="card-header text-center mt-2">
                     Profile Bio
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item my-2">Current City:
-                      <ul class="text-center">Richmond, VA</ul>
+                      <ul id="city" class="text-center">Richmond, VA</ul>
                     </li>
                     <li class="list-group-item">Fishing Techniques:
                       <ul class="text-center">Recreational fishing / fishing for pleasure</ul>
@@ -182,6 +167,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <script type="text/javascript" src="js/members.js"></script>
+    <script type="text/javascript" src="../js/profile.js"></script>
   </body>
 </html>

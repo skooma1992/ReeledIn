@@ -46,11 +46,14 @@ module.exports = function(app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id,
-        profile_pic: req.user.profile_pic,
-      });
+      res.json(req.user
+
+
+        // email: req.user.email,
+        // id: req.user.id,
+        // profile_pic: req.user.profile_pic,
+        
+      )
     }
   });
 
@@ -205,6 +208,8 @@ module.exports = function(app) {
       res.redirect("/")
     })
   });
+
+  
 
 
 

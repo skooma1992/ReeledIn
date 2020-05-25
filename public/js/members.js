@@ -10,7 +10,7 @@ $(document).ready(function() {
   var allFish;
 
   $.get("/api/user_data").then(function(data) {
-    $(".member-name").text(data.email);
+    $(".member-name").text(data.user_name ? data.user_name : data.email);
     console.log(data.email);
 
     id = data.id;
@@ -99,8 +99,8 @@ $(document).ready(function() {
             "#post-div"
           ).prepend(`      <div class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
           <div class="card-body">
-            <img id="small-blank-avatar" class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic} alt="Profile Pic">
-            <p class="card-text"><strong>${fish.User.email}</strong> caught a <span class="postion-relative"><span class="fish-span" data-target="post-${fish.id}">${fish.species}</span> at ${fish.location} <div class="card d-none fish-post-card position-absolute" id="post-${fish.id}" style="width: 18rem;">
+            <a href="/user_id/${fish.User.id}"><img id="small-blank-avatar" class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic} alt="Profile Pic"></a>
+            <p class="card-text"><strong><a href="/user_id/${fish.User.id}">${fish.User.user_name ? fish.User.user_name : fish.User.email}</a></strong> caught a <span class="postion-relative"><span class="fish-span" data-target="post-${fish.id}">${fish.species}</span> at ${fish.location} <div class="card d-none fish-post-card position-absolute" id="post-${fish.id}" style="width: 18rem;">
             <!-- <img src="..." class="card-img-top" alt="..."> -->
             <div class="card-body shadow-lg">
               <h5 class="card-title text-light">${fish.species}</h5>

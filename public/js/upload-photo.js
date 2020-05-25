@@ -53,9 +53,10 @@ fileUpload.addEventListener("change", function(event) {
 });
 
 $.get("/api/user_data").then(function(data) {
+  console.log(data)
   user_id = data.id
   $("#user_id").val(data.id)
-  $("#user_name").val(data.id)
-  $("#location").val(data.id)
-  $("#bio").val(data.id)
+  $("#user_name").val(data.user_name)
+  $("#city").val(data.city)
+  $("#bio").val(data.bio)
 })
