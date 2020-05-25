@@ -5,7 +5,7 @@ $.get("/api/users/" + user_id, function(res){
    console.log(res)
    user_id = res.id
   $("#user_id").val(res.id)
-  $("#profile_pic").val(res.profile_pic)
+  $("#profile_pic").append(res.profile_pic)
   $("#user_name").val(res.user_name)
   $("#city").val(res.city)
   $("#bio").val(res.bio)
