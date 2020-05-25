@@ -2,7 +2,7 @@
 
 >Reeledin is a social media application geared towards fisherman all across the country!
 >Log in and show your friends where you've been, or see where they've gone!
->Caught something cool? let everyone know what, and where!
+>Caught something cool? Let everyone know what and where!
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/contributors/)
@@ -16,6 +16,9 @@
 ```javascript
 $npm i
 ```
+
+## About
+Reeledin was built with Javascript and utilizes the Google Maps API, (insert fish api name), MySQL, and BootstrapMD.
 
 ## Team
 
