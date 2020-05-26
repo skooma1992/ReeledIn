@@ -17,8 +17,7 @@ $npm i
 ```
 
 ## About
->ReeledIn was built with Javascript and utilizes the Google Maps API, FishWatch AP
-I, MySQL, and BootstrapMD.
+>ReeledIn was built with Javascript and utilizes the Google Maps API, FishWatch API, MySQL, and BootstrapMD.
 
 ## Team
 
