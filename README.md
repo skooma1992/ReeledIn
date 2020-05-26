@@ -4,12 +4,11 @@
 >Log in and show your friends where you've been, or see where they've gone!
 >Caught something cool? Let everyone know what and where!
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-[![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/contributors/)
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/pull/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![GitHub version](https://badge.fury.io/gh/Naereen%2FStrapDown.js.svg)](https://github.com/Naereen/StrapDown.js)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+![Issues Badge](https://img.shields.io/github/issues/skooma1992/ReeledIn)
+![Forks](https://img.shields.io/github/forks/skooma1992/ReeledIn)
+![Contributors](https://img.shields.io/badge/Contributors-4-orange)
+![Pull Requests](https://img.shields.io/badge/Pull%20Requests-0-green)
+![License](https://img.shields.io/github/license/skooma1992/ReeledIn)
 
 ## Setup
 >Run NPM Install to install all necessary dependencies
@@ -18,7 +17,8 @@ $npm i
 ```
 
 ## About
-Reeledin was built with Javascript and utilizes the Google Maps API, (insert fish api name), MySQL, and BootstrapMD.
+>ReeledIn was built with Javascript and utilizes the Google Maps API, FishWatch AP
+I, MySQL, and BootstrapMD.
 
 ## Team
 
