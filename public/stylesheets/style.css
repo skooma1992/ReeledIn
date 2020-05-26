@@ -444,5 +444,9 @@ td {
   color: rgb(100, 126, 197);
   font-size: small;
 }
-
+.post-avatar {
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+}
 

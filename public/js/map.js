@@ -84,6 +84,15 @@ function logmarker(name, info, lat, lng, user_id) {
     lng: lng,
     user_id: user_id
   })
+  
+  $.get("/api/user_data").then(function(res){
+    user_id = res.id;
+    $.get("/api/users/" + user_id).then(function(data) {
+      $("#small-blank-avatar").attr("src", data.profile_pic) 
+    })
+  })
+  
+  
 }
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {

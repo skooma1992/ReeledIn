@@ -2,20 +2,101 @@
   <head>
     <meta charset="utf-8" />
     <title>ReeledIn Upload Profile Pic</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="stylesheets/style.css" rel="stylesheet" />
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
     />
+    <link href="stylesheets/style.css" rel="stylesheet" />
     <link
       rel="shortcut icon"
       type="image/png"
-      href="./img/reeledin-favicon.png"
+      href="./img/reeledin-favicon2.png"
     />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body id="main-body">
+    <nav id="my-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/members"
+        ><img id="navbar-logo" src="img/reeledin-logo.png" alt="ReeledIn"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <form class="form-inline my-2 my-lg-0">
+              <input
+                id="search-input"
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                id="search-button"
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
+          </li>
+          <li id="map-li" class="nav-item active">
+            <a class="nav-link" href="/map"
+              >Map <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="member-name"></span>
+              <img
+                id="small-blank-avatar"
+                src="./img/blank-profile.png"
+                alt="Profile Pic"
+              />
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <a class="dropdown-item" href="/map">Upload Location</a>
+              <a class="dropdown-item" href="/mapPoint">All Locations</a>
+              <a class="dropdown-item" href="/members">Home</a>
+              <a class="dropdown-item" href="/upload-photo">Update Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <br />
     <div class="container">
       <div class="card">
         <h2>Update Your Profile</h2>
@@ -35,7 +116,11 @@
           <label><button id="save-pic-button">Save</button></label>
         </div>
         <hr style="border:gray solid 1px; width:80%" />
-        <form method="post" style="width:60%; color:black" action="/api/user-info">
+        <form
+          method="post"
+          style="width:60%; color:black"
+          action="/api/user-info"
+        >
           <div class="form-group">
             <label for="exampleFormControlInput1">Username</label>
             <input
@@ -45,14 +130,9 @@
               id="user_name"
               placeholder="username"
             />
-          </div>          
+          </div>
           <div class="form-group" style="display:none">
-            <input
-              name="id"
-              type="text"
-              class="form-control"
-              id="user_id"
-            />
+            <input name="id" type="text" class="form-control" id="user_id" />
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Where you live</label>
@@ -93,6 +173,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="js/upload-photo.js"></script>
+    <script type="text/javascript" src="/js/upload-photo.js"></script>
   </body>
 </html>
