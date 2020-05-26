@@ -1,18 +1,9 @@
-/////////////////////////////////////////////////////////////////////////
-
-
-    // map.js
     var pos;
     var map, infoWindow;
     var markers = [];
     var locations = []
     let id;
-    
-    
-    
-    
-    
-    
+  
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
@@ -50,26 +41,9 @@
             animation: google.maps.Animation.DROP
         });
         markers.push(marker);
-        showMarkers();
+       
     }
-    // Sets the map on all markers in the array.
-    function setMapOnAll(map) {
-        for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(map);
-        }
-    }
-    
-    function clearMarkers() {
-        setMapOnAll(null);
-    }
-    // Shows any markers currently in the array.
-    function showMarkers() {
-        setMapOnAll(map);
-    }
-    function deleteMarkers() {
-        clearMarkers();
-        markers = [];
-    }
+ 
     
     function addLocationToTable(name, info, locationId) {
         

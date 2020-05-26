@@ -111,31 +111,6 @@ const infowindow = new google.maps.InfoWindow({
         infowindow.open(map, marker)
     });
     markers.push(marker);
-    showMarkers();
+   
 }
 
-// Sets the map on all markers in the array.
-function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }
-}
-// function setMapOnAllLocations(locations) {
-//     for (var i = 0; i < locations.length; i++) {
-//         var newMarker = new google.maps.Marker({
-//             position: locations[i],
-//             map: map,
-//         });
-//     }
-// }
-function clearMarkers() {
-    setMapOnAll(null);
-}
-// Shows any markers currently in the array.
-function showMarkers() {
-    setMapOnAll(map);
-}
-function deleteMarkers() {
-    clearMarkers();
-    markers = [];
-}
