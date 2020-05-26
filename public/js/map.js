@@ -106,4 +106,12 @@
     console.log(name + info + lat + lng)
     logmarker(name, info, lat, lng)
   })
-
+  
+  $.get("/api/user_data").then(function(res){
+    user_id = res.id;
+    $.get("/api/users/" + user_id).then(function(data) {
+      $("#small-blank-avatar").attr("src", data.profile_pic) 
+    })
+  })
+  
+  

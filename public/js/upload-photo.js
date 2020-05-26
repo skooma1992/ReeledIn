@@ -52,11 +52,15 @@ fileUpload.addEventListener("change", function(event) {
   });
 });
 
-$.get("/api/user_data").then(function(data) {
-  console.log(data)
-  user_id = data.id
-  $("#user_id").val(data.id)
-  $("#user_name").val(data.user_name)
-  $("#city").val(data.city)
-  $("#bio").val(data.bio)
+$.get("/api/user_data").then(function(res){
+  user_id = res.id;
+  $.get("/api/users/" + user_id).then(function(data) {
+    console.log(data)
+    $("#user_id").val(data.id)
+    $("#user_name").val(data.user_name)
+    $("#city").val(data.city)
+    $("#bio").val(data.bio)
+    $("#small-blank-avatar").attr("src", data.profile_pic) 
+  })
 })
+

@@ -180,6 +180,12 @@ module.exports = function(app) {
     });
   });
 
+  app.delete("/api/post", function (req, res) {
+    db.Post.destroy({where:{id:req.body.id}}).then(function(response){
+      res.end()
+    })
+  })
+
   // working on post api
   //////////////////////////////////////////////////////////////////////////////
   app.post("/api/post", function(req, res) {
@@ -208,10 +214,6 @@ module.exports = function(app) {
       res.redirect("/")
     })
   });
-
-  
-
-
 
 app.post("/api/location", function(req, res) {
   db.Location.create({

@@ -10,12 +10,13 @@ $(document).ready(function() {
   var allFish;
 
   $.get("/api/user_data").then(function(data) {
-    $(".member-name").text(data.user_name ? data.user_name : data.email);
-    console.log(data.email);
+    console.log(data);
 
     id = data.id;
 
     $.get("/api/users/" + id).then(function(data) {
+      $(".member-name").text(data.user_name ? data.user_name : data.email);
+
       if (data.profile_pic != null) {
         profilePicDiv.forEach((element) => (element.src = data.profile_pic));
 
@@ -86,11 +87,17 @@ $(document).ready(function() {
           var postDate = fish.createdAt.slice(0, 10).split("-");
           var postTime = fish.createdAt.slice(11, 16).split(":");
           var postYear = postDate[0];
+          postTime[0] = parseInt(postTime[0]) - 4;
+
+          if (parseInt(postTime[0]) < 0){
+            postTime[0]= parseInt(postTime[0]) + 24
+            postDate[1] = parseInt(postDate[1]) -1 
+
+          }
+          postTime = postTime.join(":");
           postDate.shift();
           postDate.push(postYear);
           postDate = postDate.join("/");
-          postTime[0] = parseInt(postTime[0]) - 4;
-          postTime = postTime.join(":");
           time = postDate + " at " + postTime;
           console.log(postDate);
           console.log(postTime);
@@ -98,8 +105,9 @@ $(document).ready(function() {
           $(
             "#post-div"
           ).prepend(`      <div class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
+          ${fish.User.id === id ? '<button type="button" data-id="${fish.id}"class="close float-right d-block position-absolute" style="top:5px; right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>': ''}
           <div class="card-body">
-            <a href="/user_id/${fish.User.id}"><img id="small-blank-avatar" class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic} alt="Profile Pic"></a>
+            <a href="/user_id/${fish.User.id}"><img class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic ? fish.User.profile_pic: "./img/blank-profile.png"} alt="Profile Pic"></a>
             <p class="card-text"><strong><a href="/user_id/${fish.User.id}">${fish.User.user_name ? fish.User.user_name : fish.User.email}</a></strong> caught a <span class="postion-relative"><span class="fish-span" data-target="post-${fish.id}">${fish.species}</span> at ${fish.location} <div class="card d-none fish-post-card position-absolute" id="post-${fish.id}" style="width: 18rem;">
             <!-- <img src="..." class="card-img-top" alt="..."> -->
             <div class="card-body shadow-lg">
@@ -137,3 +145,14 @@ $(document).ready(function() {
 function reloadPage() {
   location.reload();
 }
+
+$("#post-div").on("click", ".close", function(){
+  $.ajax({
+    url: '/api/post',
+    type: 'DELETE',
+    data: {id:$(this).attr("data-id")},
+    success: function(result) {
+        location.reload();
+    }
+}); 
+})

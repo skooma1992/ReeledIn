@@ -2,16 +2,28 @@
 <html lang="en">
   <head>
     <title>ReeledIn Home</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-    <link href="../stylesheets/style.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="../img/reeledin-favicon2.png">
-  
-  
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link href="../stylesheets/style.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="../img/reeledin-favicon2.png"
+    />
   </head>
 
   <body id="main-body">
@@ -76,10 +88,9 @@
               aria-labelledby="navbarDropdownMenuLink"
             >
               <a class="dropdown-item" href="/members">Home</a>
-              <a class="dropdown-item" href="/profile"></a>
-              <a class="dropdown-item" href="/upload-photo"
-                >Update Profile</a
-              >
+              <a class="dropdown-item" href="/profile">Profile</a>
+              <a class="dropdown-item" href="/upload-photo">Update Profile</a>
+              <a class="dropdown-item" href="/map">Upload Location</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>
@@ -89,58 +100,36 @@
     </nav>
     <br />
     <div class="container">
-      <div class="jumbotron text-dark">
-        <h1 id="user_name" class="display-4"></h1>
-        <div class="card shadow-lg">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-4">
-                <div class="card shadow-lg" style="width: 18rem;">
-                  <div class="card-body">
-                    <h4  class="card-title">Profile</h4>
-                    <img id="profile_pic" src="../img/blank-profile.png" alt="Profile Pic">
-
-                    <p class="card-text">
-                      <h5>Bio, Hobbies, Interests</h5>
-                    </p>
-                    <p id="bio"></p>
-                    <a href="#" class="btn btn-primary">Edit Profile</a>
-                  </div>
-                </div>
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <div class="row">
+            <h2 class="card-title text-dark text-center w-100">
+              <span id="user_name"></span>'s Profile
+            </h2>
+            <div class="col-md-6 text-center">
+              <img
+                id="profile_pic"
+                src="../img/blank-profile.png"
+                alt="Profile Pic"
+                style="width: 70%"
+              />
+            </div>
+            <div class="col-md-6 text-center">
+              <h3>About <span id="user_name2"></span>:</h3>
+              <div>
+               <strong>Resisdence:</strong>
+               <br>
+                <span id="city" class="text-center"></span>
               </div>
-              <div class="col-sm-8">
-                <div class="card shadow-lg">
-                  <div class="card-header text-center mt-2">
-                    Profile Bio
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item my-2">Current City:
-                      <ul id="city" class="text-center">Richmond, VA</ul>
-                    </li>
-                    <li class="list-group-item">Fishing Techniques:
-                      <ul class="text-center">Recreational fishing / fishing for pleasure</ul>
-                      <ul class="text-center">Angling</ul>
-                      <ul class="text-center">Noodling</ul>
-
-                    </li>
-                    <li class="list-group-item">Favorite Locations:
-                      <ul class="text-center">Richmond, VA</ul>
-                    </li>
-                  </ul>
-                </div>
-                <div class="card my-4 shadow-lg">
-                  <div class="card-header">
-                    Featured
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
+              <div>
+                <strong>Contact Email:</strong>
+                <br>
+                <span id="email" class="text-center"></span>
+              </div>
+              <div>
+                <strong>Bio:</strong>
+                <br>
+                <span id="bio" class="text-center"></span>
               </div>
             </div>
           </div>
