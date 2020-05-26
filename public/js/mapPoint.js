@@ -5,10 +5,14 @@
 var pos;
 var map, infoWindow;
 var markers = [];
+var locations = []
+let id;
 var locations = [];
 const infowindows = [];
 
 const markerBtn = document.getElementById("markerBtn");
+
+
 
 function fuckAmarker() {
     $.get("/api/location").then(function (data) {
@@ -107,7 +111,7 @@ const infowindow = new google.maps.InfoWindow({
         infowindow.open(map, marker)
     });
     markers.push(marker);
-    showMarkers();
+   
 }
 
 // Sets the map on all markers in the array.
@@ -136,5 +140,12 @@ function deleteMarkers() {
     markers = [];
 }
 
-
+$.get("/api/user_data").then(function(res){
+    user_id = res.id;
+    $.get("/api/users/" + user_id).then(function(data) {
+      $("#small-blank-avatar").attr("src", data.profile_pic) 
+    })
+  })
+  
+  
 
