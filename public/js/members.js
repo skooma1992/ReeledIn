@@ -13,7 +13,7 @@ $(document).ready(function() {
     console.log(data);
 
     id = data.id;
-
+    // where memeber name appears, either display username or user's email
     $.get("/api/users/" + id).then(function(data) {
       $(".member-name").text(data.user_name ? data.user_name : data.email);
 
@@ -83,6 +83,7 @@ $(document).ready(function() {
           var thisFish = allFish.filter(
             (currentFish) => currentFish.species === fish.species
           );
+          // work for the timestamp of the post from the time created in the database
           var time = fish.createdAt;
           var postDate = fish.createdAt.slice(0, 10).split("-");
           var postTime = fish.createdAt.slice(11, 16).split(":");
@@ -101,7 +102,9 @@ $(document).ready(function() {
           time = postDate + " at " + postTime;
           console.log(postDate);
           console.log(postTime);
-
+          // prepending the post to the post-div
+          // if the user id matches the user id of the post then that user has the ability to delete post
+          // the post will consist of user's profile pic, username or email (if they haven't changed their username), fish caught, location, length, weight, time, and link to map of location.  
           $(
             "#post-div"
           ).prepend(`      <div class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
@@ -132,20 +135,22 @@ $(document).ready(function() {
       //////////////////////////////////////////////////////////////////////////////
     });
   });
-
+// mouseover keywaord in post to display fish data card
   $("#post-div").on("mouseover", ".fish-span", function() {
     var target = $(this).attr("data-target");
     $("#" + target).removeClass("d-none");
   });
+  // mouseleave displayed post to hide fish card data
   $("#post-div").on("mouseleave", ".fish-span", function() {
     var target = $(this).attr("data-target");
     $("#" + target).addClass("d-none");
   });
 });
+
 function reloadPage() {
   location.reload();
 }
-
+// deletes post from page and database
 $("#post-div").on("click", ".close", function(){
   $.ajax({
     url: '/api/post',

@@ -31,7 +31,7 @@ fileUpload.addEventListener("change", function(event) {
   /*******************************************************************/
   /*******************************************************************/
 
-  // Here I'm trying to save input the picURL into the User db with a hard-coded ID of 1 (this would be dynamic later on)
+  // Here I'm trying to save input the picURL into the User db with a hard-coded ID 
 
   $("#save-pic-button").on("click", function(event) {
     window.location.href = "/members";
@@ -52,6 +52,7 @@ fileUpload.addEventListener("change", function(event) {
   });
 });
 
+// grabbing info from update profile html for profile html
 $.get("/api/user_data").then(function(res){
   user_id = res.id;
   $.get("/api/users/" + user_id).then(function(data) {
