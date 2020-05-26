@@ -37,9 +37,9 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="/members">Home</a>
-            <a class="dropdown-item" href="/mylocationsmap">My Locations</a>
+            <a class="dropdown-item" href="/mapPoint">All Locations</a>
             <a class="dropdown-item" href="/map">Upload Location</a>
-            <a class="dropdown-item" href="/upload-photo">Update Profile</a>
+            <a class="dropdown-item" href="/upload-photo">Upload Profile Pic</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Logout</a>
           </div>
@@ -61,7 +61,7 @@
   <div class="container">
 
     <div class="row">
-    
+        
         <div id="map"></div>
         
       
@@ -74,9 +74,22 @@
 
     </div>
 
+    <div class="row">
+      <table id="locations-table" style="width:100%">
+        <tr>
+          <th id="column1">Location</th>
+          <th id="column2">Description</th>
+          <th id="column3"></th>
+        </tr>
+    
+      </table>
+
+      
+    </div>
+
   </div>
 
-  <script type="text/javascript" src="js/mapPoint.js"></script>
+  <script type="text/javascript" src="js/myLocationsMap.js"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUbhAYGkZe0htc5lauudvkrQmrijh80vo&callback=initMap">
     </script>
