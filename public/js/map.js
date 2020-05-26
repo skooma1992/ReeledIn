@@ -68,7 +68,8 @@ function addMarker(location) {
   var marker = new google.maps.Marker({
     position: location,
     map: map,
-    animation: google.maps.Animation.DROP
+    animation: google.maps.Animation.DROP,
+    icon: "img/icon.png"
   });
   markers.push(marker);
   showMarkers();

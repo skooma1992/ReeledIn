@@ -69,7 +69,8 @@ const infowindow = new google.maps.InfoWindow({
     var marker = new google.maps.Marker({
         position: location,
         map: map,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        icon: "img/icon.png"
     });
     marker.addListener("click", function() {
         infowindow.open(map, marker)

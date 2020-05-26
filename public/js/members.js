@@ -67,12 +67,12 @@ $(document).ready(function () {
           });
       });
       // working on page load posts
-      $.get("/api/post/" + id).then(function (data) {
+      $.get("/api/post/").then(function (data) {
         console.log(data.length);
-        if (data.length === 0) {
-          $("#post-div").hide();
-        }
-        else {
+        // if (data.length === 0) {
+        //   $("#post-div").hide();
+        // }
+        // else {
           data.forEach(function (fish) {
             var thisFish = allFish.filter(
               (currentFish) => currentFish.species === fish.species
@@ -117,11 +117,10 @@ $(document).ready(function () {
             <p class="card-text">It was ${fish.length} inches long and weighed ${fish.weight} lbs.</p>
             <p class="card-text">${fish.message}</p>
             <p class="card-tex time-stamp">${time}</p>
-            <a href="#" class="card-link">Map</a>
           </div>
         </div>`);
           });
-        }
+        // }
       });
       //////////////////////////////////////////////////////////////////////////////
     });
