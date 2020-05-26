@@ -3,7 +3,7 @@
     var markers = [];
     var locations = []
     let id;
-  
+ 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
@@ -25,7 +25,7 @@
                 let newLocation = { lat: Number(location.lat), lng: Number(location.lng) }
                 //console.log(location.lat + location.lng + 'trying it out')
                 locations.push(newLocation);
-                addMarker(newLocation)
+                addMarker(newLocation, location.name, location.info)
                 addLocationToTable(location.name, location.info, location.id);
             });
             console.log(locations, "this locations array")
@@ -34,12 +34,30 @@
     })
     }
     // Adds a marker to the map and push to the array.
-    function addMarker(location) {
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map,
-            animation: google.maps.Animation.DROP
-        });
+    function addMarker(location, name, info) {
+
+        let contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h4 id="firstHeading" class="firstHeading">' + name + '</h4>'+
+        '<div id="bodyContent">'+
+        '<p>' + info + '</p>'+
+        '</div>'+
+        '</div>';
+        
+        const infowindow = new google.maps.InfoWindow({
+            content: contentString
+            });
+        
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                animation: google.maps.Animation.DROP
+            });
+            marker.addListener("click", function() {
+                infowindow.open(map, marker)
+            });
+     
         markers.push(marker);
        
     }
@@ -76,20 +94,10 @@
 
       $(`#td${locationId}`).append(newDeleteButton);
 
-        
-        
-        
-
-       
-    
-       
-       
-    
+     
     }
     
-    
-    
-    
+ 
     function deleteLocation(id) {
         $.ajax({
           method: "DELETE",
@@ -99,19 +107,7 @@
             console.log("Location ID: " + id + " has successfully been deleted.");
           });
       }
-    
 
-   
-     
-    //   $("#deleteButton").on("click", function() {
-    
-    //     var id = $(this).data("id");
-        
-    //     console.log("clicked and id is:" + id)
-    
-    
-    //   });
-    
     
       $(".thisButton").on("click", function() {
     
@@ -125,10 +121,7 @@
     
       });
     
-    
-    
-
-
+ 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 37.5407, lng: -77.4360 },
@@ -138,29 +131,7 @@
         
         
         infoWindow = new google.maps.InfoWindow;
-        // This event listener will call addMarker() when the map is clicked.
-        map.addListener('click', function (mapsMouseEvent) {
-            // set pos to mapsMouseEvent
-            pos = mapsMouseEvent.latLng;
-            // add marker to pos position
-            addMarker(pos);
-            // set pos object to string eg (38.00000, 36.234545)
-            let posString = pos.toString();
-            // set posString to array eg [38.00000, 36.234545]
-            // let posArray = posString.replace(/\(/g, "[").replace(/\)/g, "]");
-            let posArray = posString.replace(/\(/g, "").replace(/\)/g, "");
-            let finalPosArray = posArray.split(',');
-            console.log(posString);
-            console.log(posArray);
-            console.log(finalPosArray);
-            let latLngObject = {
-                lat: Number(finalPosArray[0]),
-                lng: Number(finalPosArray[1])
-            }
-            console.log(latLngObject);
-            console.log(markers);
-    
-        });
+
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -168,9 +139,7 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                infoWindow.setPosition(pos);
-                infoWindow.setContent("Your location.");
-                infoWindow.open(map);
+               
                 map.setCenter(pos);
                 console.log(pos);
             }, function () {
@@ -191,3 +160,10 @@
             console.log("Location ID: " + id + " has successfully been deleted.");
           });
       }
+
+      $.get("/api/user_data").then(function(res){
+        user_id = res.id;
+        $.get("/api/users/" + user_id).then(function(data) {
+          $("#small-blank-avatar").attr("src", data.profile_pic) 
+        })
+      })

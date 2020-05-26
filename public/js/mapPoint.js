@@ -1,18 +1,8 @@
-//////////////////////////////////////////////////////////////////////////
-
-
-// map.js
 var pos;
 var map, infoWindow;
 var markers = [];
 var locations = []
 let id;
-var locations = [];
-const infowindows = [];
-
-const markerBtn = document.getElementById("markerBtn");
-
-
 
 function fuckAmarker() {
     $.get("/api/location").then(function (data) {
@@ -34,39 +24,13 @@ function initMap() {
     fuckAmarker();
 
     infoWindow = new google.maps.InfoWindow;
-    // This event listener will call addMarker() when the map is clicked.
-    map.addListener('click', function (mapsMouseEvent) {
-        // set pos to mapsMouseEvent
-        pos = mapsMouseEvent.latLng;
-        // add marker to pos position
-        addMarker(pos);
-        // set pos object to string eg (38.00000, 36.234545)
-        let posString = pos.toString();
-        // set posString to array eg [38.00000, 36.234545]
-        // let posArray = posString.replace(/\(/g, "[").replace(/\)/g, "]");
-        let posArray = posString.replace(/\(/g, "").replace(/\)/g, "");
-        let finalPosArray = posArray.split(',');
-        console.log(posString);
-        console.log(posArray);
-        console.log(finalPosArray);
-        let latLngObject = {
-            lat: Number(finalPosArray[0]),
-            lng: Number(finalPosArray[1])
-        }
-        console.log(latLngObject);
-        console.log(markers);
-
-    });
-    // Try HTML5 geolocation.
+  
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            infoWindow.setPosition(pos);
-            infoWindow.setContent("Your location.");
-            infoWindow.open(map);
             map.setCenter(pos);
             console.log(pos);
         }, function () {
@@ -114,31 +78,6 @@ const infowindow = new google.maps.InfoWindow({
    
 }
 
-// Sets the map on all markers in the array.
-function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }
-}
-function setMapOnAllLocations(locations) {
-    for (var i = 0; i < locations.length; i++) {
-        var newMarker = new google.maps.Marker({
-            position: locations[i],
-            map: map,
-        });
-    }
-}
-function clearMarkers() {
-    setMapOnAll(null);
-}
-// Shows any markers currently in the array.
-function showMarkers() {
-    setMapOnAll(map);
-}
-function deleteMarkers() {
-    clearMarkers();
-    markers = [];
-}
 
 $.get("/api/user_data").then(function(res){
     user_id = res.id;

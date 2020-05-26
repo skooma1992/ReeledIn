@@ -47,9 +47,6 @@ function initMap() {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      infoWindow.setPosition(pos);
-      infoWindow.setContent("Your location.");
-      infoWindow.open(map);
       map.setCenter(pos);
     }, function () {
       handleLocationError(true, infoWindow, map.getCenter());
@@ -124,4 +121,10 @@ $('#catchButton').click(function (d) {
   $('#locationInfo').val("");
 })
 
+$.get("/api/user_data").then(function(res){
+  user_id = res.id;
+  $.get("/api/users/" + user_id).then(function(data) {
+    $("#small-blank-avatar").attr("src", data.profile_pic) 
+  })
+})
 

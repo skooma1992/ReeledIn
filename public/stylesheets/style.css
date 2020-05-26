@@ -112,17 +112,10 @@ h2 {
   border-radius: 10px;
 }
 
-/* #post-input {
-  border-radius: 0px;
-  background: transparent;
-  color: black;
-  border: 1px solid #ff5e00;
-  width: 90%;
-  box-shadow: none;
-  height: 50px;
-  border-radius: 10px;
-  margin-left: 10px;
-} */
+#post-div {
+  margin-bottom: 200px;
+  margin-top: 70px;
+}
 
 #post-input::placeholder {
   color: rgb(155, 155, 155);
