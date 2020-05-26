@@ -114,3 +114,38 @@ const infowindow = new google.maps.InfoWindow({
    
 }
 
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
+function setMapOnAllLocations(locations) {
+    for (var i = 0; i < locations.length; i++) {
+        var newMarker = new google.maps.Marker({
+            position: locations[i],
+            map: map,
+        });
+    }
+}
+function clearMarkers() {
+    setMapOnAll(null);
+}
+// Shows any markers currently in the array.
+function showMarkers() {
+    setMapOnAll(map);
+}
+function deleteMarkers() {
+    clearMarkers();
+    markers = [];
+}
+
+$.get("/api/user_data").then(function(res){
+    user_id = res.id;
+    $.get("/api/users/" + user_id).then(function(data) {
+      $("#small-blank-avatar").attr("src", data.profile_pic) 
+    })
+  })
+  
+  
+

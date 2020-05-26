@@ -46,14 +46,7 @@ module.exports = function(app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
-      res.json(req.user
-
-
-        // email: req.user.email,
-        // id: req.user.id,
-        // profile_pic: req.user.profile_pic,
-        
-      )
+      res.json(req.user)
     }
   });
 
@@ -66,7 +59,6 @@ module.exports = function(app) {
           var queryURL = "https://www.fishwatch.gov/api/species/";
           axios.get(queryURL).then(function(response) {
               console.log(response.data);
-              // response = JSON.parse(response.data);
               allFish = response.data.map(fish => fish = {
                 species: fish["Species Name"],
                 photo: fish["Species Illustration Photo"].src,
@@ -87,16 +79,7 @@ module.exports = function(app) {
       }
     });
   });
-  // app.post("/api/checkFish", function(req, res) {
-  //   console.log(req);
-  //   db.Fish.bulkCreate(req.body.fish)
-  //     .then(function() {
-  //       console.log("All fish added");
-  //     })
-  //     .catch(function(err) {
-  //       res.status(401).json(err);
-  //     });
-  // });
+
   /****************************************************************************************** */
   /****************************************************************************************** */
   /****************************************************************************************** */
@@ -143,24 +126,6 @@ module.exports = function(app) {
   // working on post api
   //////////////////////////////////////////////////////////////////////////////
 
-  // app.post("/api/post", function(req, res) {
-  //   console.log(req.body)
-  //   db.Post.create({
-  //     message: req.body.body,
-  //     user_id: parseInt(req.body.user_id),
-  //     location: req.body.location,
-  //     length: parseFloat(req.body.length),
-  //     weight: parseFloat(req.body.weight),
-
-  //   })
-  //     .then(function() {
-  //       console.log("You've succesfully added a post");
-  //     })
-  //     .catch(function(err) {
-  //       res.status(401).json(err);
-  //     });
-  // });
-
   app.get("/api/post", function(req, res) {
     db.Post.findAll({
       include: [db.User],
@@ -179,6 +144,13 @@ module.exports = function(app) {
       res.json(dbPost);
     });
   });
+  
+  // deletes post from the database
+  app.delete("/api/post", function (req, res) {
+    db.Post.destroy({where:{id:req.body.id}}).then(function(response){
+      res.end()
+    })
+  })
 
   // working on post api
   //////////////////////////////////////////////////////////////////////////////
@@ -188,11 +160,6 @@ module.exports = function(app) {
     });
   });
 
-  // app.get("/api/post", function(req,res){
-  //   db.Post.findAll({}).then(function(dbPost){
-  //     res.json(dbPost);
-  //   })
-  // })
   app.post("/api/user-info", function(req, res) {
     console.log(req.body);
     db.User.update(
@@ -208,10 +175,6 @@ module.exports = function(app) {
       res.redirect("/")
     })
   });
-
-  
-
-
 
 app.post("/api/location", function(req, res) {
   db.Location.create({
