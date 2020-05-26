@@ -115,7 +115,7 @@ $(document).ready(function() {
           $(
             "#post-div"
           ).prepend(`      <div class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
-          ${fish.User.id === id ? '<button type="button" data-id="${fish.id}"class="close float-right d-block position-absolute" style="top:5px; right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>': ''}
+          ${fish.User.id === id ? `<button type="button" data-id="${fish.id}"class="close float-right d-block position-absolute" style="top:5px; right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>`: ''}
           <div class="card-body">
             <a href="/user_id/${fish.User.id}"><img class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic ? fish.User.profile_pic: "./img/blank-profile.png"} alt="Profile Pic"></a>
             <p class="card-text"><strong><a href="/user_id/${fish.User.id}">${fish.User.user_name ? fish.User.user_name : fish.User.email}</a></strong> caught a <span class="postion-relative"><span class="fish-span" data-target="post-${fish.id}">${fish.species}</span> at ${fish.location} <div class="card d-none fish-post-card position-absolute" id="post-${fish.id}" style="width: 18rem;">
@@ -168,4 +168,3 @@ $("#post-div").on("click", ".close", function(){
     }
 }); 
 })
-}
