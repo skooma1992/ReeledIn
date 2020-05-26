@@ -172,7 +172,7 @@ module.exports = function(app) {
         where: {id: req.body.id}
       }
     ).then(function(rowsUpdated) {
-      res.redirect("/")
+      res.redirect("/members")
     })
   });
 
