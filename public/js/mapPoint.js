@@ -6,8 +6,11 @@ var pos;
 var map, infoWindow;
 var markers = [];
 var locations = []
+let id;
 
 const markerBtn = document.getElementById("markerBtn");
+
+
 
 function fuckAmarker() {
     $.get("/api/location").then(function (data) {
@@ -16,14 +19,16 @@ function fuckAmarker() {
             let newLocation = { lat: Number(location.lat), lng: Number(location.lng) }
             //console.log(location.lat + location.lng + 'trying it out')
             locations.push(newLocation)
+            addMarker(newLocation)
         });
-        console.log(locations, "this another location")
+        console.log(locations, "this locations array")
+        
+        
     });
-    setMapOnAllLocations(newLocation)
-
-
+    
 }
-fuckAmarker()
+
+
 console.log(locations, 'look at loc')
 
 function initMap() {
@@ -31,8 +36,9 @@ function initMap() {
         center: { lat: 37.5407, lng: -77.4360 },
         zoom: 6
     });
-
-    setMapOnAllLocations(locations);
+    fuckAmarker()
+    
+    
     infoWindow = new google.maps.InfoWindow;
     // This event listener will call addMarker() when the map is clicked.
     map.addListener('click', function (mapsMouseEvent) {
@@ -102,14 +108,14 @@ function setMapOnAll(map) {
         markers[i].setMap(map);
     }
 }
-function setMapOnAllLocations(locations) {
-    for (var i = 0; i < locations.length; i++) {
-        var newMarker = new google.maps.Marker({
-            position: locations[i],
-            map: map,
-        });
-    }
-}
+// function setMapOnAllLocations(locations) {
+//     for (var i = 0; i < locations.length; i++) {
+//         var newMarker = new google.maps.Marker({
+//             position: locations[i],
+//             map: map,
+//         });
+//     }
+// }
 function clearMarkers() {
     setMapOnAll(null);
 }
@@ -121,6 +127,3 @@ function deleteMarkers() {
     clearMarkers();
     markers = [];
 }
-
-
-
