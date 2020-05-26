@@ -181,7 +181,8 @@ app.post("/api/location", function(req, res) {
     name: req.body.name,
     info: req.body.info,
     lat: req.body.lat,
-    lng: req.body.lng
+    lng: req.body.lng,
+    user_id: req.body.user_id
   }).then(function(dbLocation) {
     console.log(dbLocation);
   });
@@ -196,6 +197,26 @@ app.get("/api/location", function(req, res) {
     });
 });
 
+app.get("/api/location/:id", function(req, res) {
+  db.Location.findAll({
+    include: [db.User],
+    where: {
+      user_id: req.params.id,
+    },
+  }).then(function(dbPost) {
+    res.json(dbPost);
+  });
+});
+
+app.delete("/api/location/:id", function(req, res) {
+  let deleteId = req.params.id;
+
+ db.Location.destroy({
+  where: {
+      id: deleteId
+  }
+})
+})
 
 }
 

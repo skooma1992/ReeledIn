@@ -25,6 +25,11 @@ module.exports = function(sequelize, DataTypes){
             allowNull: false,
             len: [1]
         },
-	});
+    });
+    
+    Location.associate = models => {
+        Location.belongsTo(models.User, {foreignKey: 'user_id'});
+    }
+
 	return Location;
 };

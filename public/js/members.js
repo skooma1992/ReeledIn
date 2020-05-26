@@ -77,8 +77,15 @@ $(document).ready(function() {
 
       // working on page load posts
 
-      $.get("/api/post").then(function(data) {
-        console.log(data);
+      $.get("/api/post/" + id).then(function(data) {
+
+        console.log(data.length);
+      
+        if (data.length === 0) {
+          $("#post-div").hide();
+        }
+
+        else {
         data.forEach(function(fish) {
           var thisFish = allFish.filter(
             (currentFish) => currentFish.species === fish.species
@@ -120,7 +127,6 @@ $(document).ready(function() {
               <br>
               ${thisFish[0].quote}
               </p>
-
             </div>
           </div> </span></p>
             <p class="card-text">It was ${fish.length} inches long and weighed ${fish.weight} lbs.</p>
@@ -130,8 +136,9 @@ $(document).ready(function() {
           </div>
         </div>`);
         });
+      }
       });
-
+    
       //////////////////////////////////////////////////////////////////////////////
     });
   });
@@ -161,3 +168,4 @@ $("#post-div").on("click", ".close", function(){
     }
 }); 
 })
+}

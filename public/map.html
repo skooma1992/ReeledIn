@@ -57,21 +57,23 @@
 
     <div class="row">
     
-        <button id="markerBtn">Add Marker</button>
+        
         <!--The div element for the map -->
         <div id="map"></div>
-        <form>
-          <div class="form-group">
+        <div id="locationsFormDiv">
+        <form  id="locationsForm">
+          <div  class="form-group">
             <label for="locationName">Spot</label>
-            <input type="text" class="form-control" id="locationName" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">What did you catch?</small>
+            <input type="text" class="form-control" id="locationName">
+           
           </div>
           <div class="form-group">
-            <label for="locationInfo"></label>
+            <label for="locationInfo">Description</label>
             <input type="text" class="form-control" id="locationInfo">
           </div>
           <button type="submit" class="btn btn-primary" id= "catchButton">Submit</button>
         </form>
+      </div>
       
 
       <!--Load the API from the specified URL
