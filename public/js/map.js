@@ -1,18 +1,20 @@
 let pos;
 let map, infoWindow;
-let finalPosArray = []
-const markerBtn = document.getElementById("markerBtn");
 let markers = [];
-var $submitBtn = $("#submit");
-let pickedPosition = false;
-let lat;
-let long;
+let finalPosArray = []
+let user_id;
 
+const markerBtn = document.getElementById("markerBtn");
+$.get("/api/user_data").then(function(data) {
+  
+  console.log(data.id);
+  user_id = data.id;
+
+})
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
-    
+    zoom: 6
   });
   infoWindow = new google.maps.InfoWindow;
   // This event listener will call addMarker() when the map is clicked.
@@ -75,12 +77,13 @@ function addMarker(location) {
   markers.push(marker);
   showMarkers();
 }
-function logmarker(name, info, lat, lng) {
+function logmarker(name, info, lat, lng, user_id) {
   $.post("/api/location", {
     name: name,
     info: info,
     lat: lat,
-    lng: lng
+    lng: lng,
+    user_id: user_id
   })
 }
 // Sets the map on all markers in the array.
@@ -108,6 +111,9 @@ $('#catchButton').click(function (d) {
   let lat = Number(finalPosArray[0]);
   let lng = Number(finalPosArray[1]);
   console.log(name + info + lat + lng)
-  logmarker(name, info, lat, lng)
+  logmarker(name, info, lat, lng, user_id)
+  $('#locationName').val("");
+  $('#locationInfo').val("");
 })
+
 

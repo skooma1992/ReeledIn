@@ -20,6 +20,8 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: white;
 }
 /*#main-body {
 /*  background-image: url(../img/kayak2.png);
@@ -31,6 +33,46 @@ body {
 /*  background-repeat: no-repeat;
 /*  background-attachment: fixed;
 }*/
+#locations-table, #locationsFormDiv {
+  color: white;
+  background: #ff5e00;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 200px;
+  width: 100%;
+}
+
+#locationsFormDiv {
+  text-align:center;
+  padding: 50px;
+}
+
+#locationsForm {
+  text-align: left;
+  width: 450px;
+  margin:auto;
+  
+}
+
+#locationName, #locationInfo {
+  border-radius: 0px;
+  background: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid white;
+  box-shadow: none;
+ 
+}
+
+#catchButton {
+  float: right;
+}
+
+th {
+  font-size: 25px;
+  padding: 10px;
+}
+
 
 
 #signup-logo {
@@ -126,6 +168,10 @@ button {
   opacity: 1;
 }
 
+td {
+  padding: 5px;
+  padding-left: 11px;
+}
 #login-button {
   border: none;
   margin-top: 50px;
@@ -192,9 +238,43 @@ button {
   font-size: 15px;
 }
 
+#deleteButton, #catchButton {
+  border: none;
+  background-color: white;
+  color: rgb(0, 43, 0);
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-transform: lowercase;
+  border-radius: 3px;
+}
+
+#deleteButton:hover, #catchButton:hover {
+  border: none;
+  background-color: rgb(0, 43, 0);
+  color: white;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+
 #markerBtn:hover {
   color: white;
   background-color: #ff5e00;
+}
+
+#column1 {
+  width: 40%;
+}
+
+#column2 {
+  width: 50%;
+}
+
+#column3 {
+  width: 10%;
 }
 
 #login-header {
@@ -207,6 +287,7 @@ button {
   font-style: italic;
   color: white;
 }
+
 
 #small-blank-avatar {
   border-radius: 100%;
@@ -255,6 +336,7 @@ button {
 
   border-radius: 5px;
 }
+
 
 .file-upload-container:hover {
   cursor: pointer;
@@ -342,6 +424,12 @@ button {
   /* The height is 400 pixels */
   width: 100%;
   /* The width is the width of the web page */
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  margin-top: 50px;
+  color: black;
 }
 
 /********************************************************/
