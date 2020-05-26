@@ -38,7 +38,8 @@
         var marker = new google.maps.Marker({
             position: location,
             map: map,
-            animation: google.maps.Animation.DROP
+            animation: google.maps.Animation.DROP,
+            icon: "img/icon.png"
         });
         markers.push(marker);
        
@@ -168,9 +169,6 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                infoWindow.setPosition(pos);
-                infoWindow.setContent("Your location.");
-                infoWindow.open(map);
                 map.setCenter(pos);
                 console.log(pos);
             }, function () {
