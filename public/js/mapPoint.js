@@ -1,13 +1,8 @@
-//////////////////////////////////////////////////////////////////////////
-
-
-// map.js
-var pos;
-var map, infoWindow;
-var markers = [];
-var locations = [];
-const infowindows = [];
-
+let pos;
+let map, infoWindow;
+let markers = [];
+let locations = [];
+let infowindows = [];
 const markerBtn = document.getElementById("markerBtn");
 
 function fuckAmarker() {
@@ -53,7 +48,6 @@ function initMap() {
         console.log(markers);
 
     });
-    // Try HTML5 geolocation.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             pos = {
@@ -101,7 +95,8 @@ const infowindow = new google.maps.InfoWindow({
     var marker = new google.maps.Marker({
         position: location,
         map: map,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        icon: "img/icon.png"
     });
     marker.addListener("click", function() {
         infowindow.open(map, marker)
