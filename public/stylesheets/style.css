@@ -33,6 +33,11 @@ body {
   width: 100%;
 }
 
+
+#this-post {
+  background: white;
+  border: none;
+}
 #locationsFormDiv {
   text-align:center;
   padding: 50px;

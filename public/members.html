@@ -25,14 +25,13 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <form class="form-inline my-2 my-lg-0">
-          <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button id="search-button" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+      <li id="map-li" class="nav-item active">
+        <a class="nav-link" href="/myLocationsMap">My Locations <span class="sr-only">(current)</span></a>
       </li>
       <li id="map-li" class="nav-item active">
-        <a class="nav-link" href="/map">Map <span class="sr-only">(current)</span></a>
+        <button type="button" class="btn btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
+          Reel Post
+        </button>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,13 +54,11 @@
 <br>
   <div class="container">
     <div class="row">
-      <div class="col-md-10 col-md-offset-3">
+      <!-- <div class="col-md-10 col-md-offset-3">
         <h2><span class="member-name"></span>'s Reel Feed</h2>
-      </div>
+      </div> -->
           <div class="col-md-2 col-sm-2">
-            <button type="button" class="btn btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
-              Reel Post
-            </button>
+           
             <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">

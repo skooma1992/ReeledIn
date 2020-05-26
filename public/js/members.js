@@ -114,7 +114,7 @@ $(document).ready(function() {
           // the post will consist of user's profile pic, username or email (if they haven't changed their username), fish caught, location, length, weight, time, and link to map of location.  
           $(
             "#post-div"
-          ).prepend(`      <div class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
+          ).prepend(`      <div id="this-post" class="card post-card text-dark my-4" style="width: 90%; margin:auto;">
           ${fish.User.id === id ? '<button type="button" data-id="${fish.id}"class="close float-right d-block position-absolute" style="top:5px; right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>': ''}
           <div class="card-body">
             <a href="/user_id/${fish.User.id}"><img class="post-avatar reel-pic ml-3" src=${fish.User.profile_pic ? fish.User.profile_pic: "./img/blank-profile.png"} alt="Profile Pic"></a>
@@ -136,8 +136,8 @@ $(document).ready(function() {
           </div>
         </div>`);
         });
-      }
-      });
+        }
+      
     
       //////////////////////////////////////////////////////////////////////////////
     });
@@ -152,20 +152,26 @@ $(document).ready(function() {
     var target = $(this).attr("data-target");
     $("#" + target).addClass("d-none");
   });
-});
+
 
 function reloadPage() {
   location.reload();
 }
+
 // deletes post from page and database
 $("#post-div").on("click", ".close", function(){
   $.ajax({
     url: '/api/post',
     type: 'DELETE',
-    data: {id:$(this).attr("data-id")},
+    data: {
+      id: $(this).attr("data-id")
+    },
     success: function(result) {
         location.reload();
     }
+  
 }); 
 })
-}
+
+});
+});
