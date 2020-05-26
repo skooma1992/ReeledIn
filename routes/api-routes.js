@@ -54,34 +54,6 @@ module.exports = function(app) {
     }
   });
 
-<<<<<<< HEAD
-  app.get("/api/map", (req, res) => {
-    db.Image.findAndCountAll({}).then(dbImages => {
-        var numMarker = dbImages.count;
-        var info = dbImages.rows; // all the information as an array I believe
-        console.log(`\n${numMarker} markers found! \n`);
-        res.json(info);
-    });
-});
-
-// Api is for adding fish to database, if not there
-  app.get("/api/checkFish", function (req, res){
-    db.Fish.findAll({}).then(function(data){
-      res.send(data)
-    })
-  })
-  app.post("/api/checkFish", function(req, res) {
-    console.log(req)
-    db.Fish.bulkCreate(
-      req.body.fish
-    )
-      .then(function() {
-        console.log("All fish added");
-      })
-      .catch(function(err) {
-        res.status(401).json(err);
-      });
-=======
   // Api is for adding fish to database, if not there
   app.get("/api/checkFish", function(req, res) {
     db.Fish.findAll({}).then(function(data) {
@@ -143,7 +115,6 @@ module.exports = function(app) {
     ).catch(function(err) {
       res.status(401).json(err);
     });
->>>>>>> 459dc28665e94940c72dd5c5798b5a901028e32e
   });
 
   /****************************************************************************************** */
