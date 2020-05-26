@@ -46,11 +46,14 @@ module.exports = function(app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id,
-        profile_pic: req.user.profile_pic,
-      });
+      res.json(req.user
+
+
+        // email: req.user.email,
+        // id: req.user.id,
+        // profile_pic: req.user.profile_pic,
+        
+      )
     }
   });
 
@@ -190,4 +193,46 @@ module.exports = function(app) {
   //     res.json(dbPost);
   //   })
   // })
-};
+  app.post("/api/user-info", function(req, res) {
+    console.log(req.body);
+    db.User.update(
+      {
+        user_name: req.body.user_name,
+        city: req.body.city,
+        bio: req.body.bio,
+      },
+      {
+        where: {id: req.body.id}
+      }
+    ).then(function(rowsUpdated) {
+      res.redirect("/")
+    })
+  });
+
+  
+
+
+
+app.post("/api/location", function(req, res) {
+  db.Location.create({
+    name: req.body.name,
+    info: req.body.info,
+    lat: req.body.lat,
+    lng: req.body.lng
+  }).then(function(dbLocation) {
+    console.log(dbLocation);
+  });
+});
+
+app.get("/api/location", function(req, res) {
+  db.Location.findAll({
+    
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+
+}
+

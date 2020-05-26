@@ -38,4 +38,12 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/map.html"));
   });
 
+  app.get("/mapPoint", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/mapPoint.html"));
+  });
+  
+  app.get("/user_id/:id", function(req, res){
+    res.sendFile(path.join(__dirname, "../public/profile.html"))
+  })
+
 };

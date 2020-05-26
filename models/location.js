@@ -1,16 +1,19 @@
 module.exports = function(sequelize, DataTypes){
-	var Location = sequelize.define("location", {
-        latitude: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+	var Location = sequelize.define("Location", {
+        id: {
+            type: DataTypes.BIGINT(11),
+            allowNull:false,
+            primaryKey: true,
+            autoIncrement: true
         },
-        longitude: {
-            type: DataTypes.STRING ,
+        lat: {
+            type: DataTypes.DECIMAL (16, 14),
             allowNull: false,
-            len: [1]
+        
+        },
+        lng: {
+            type: DataTypes.DECIMAL (16, 14) ,
+            allowNull: false,
         },
         name: {
             type: DataTypes.STRING ,
@@ -22,11 +25,6 @@ module.exports = function(sequelize, DataTypes){
             allowNull: false,
             len: [1]
         },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            len: [1]
-        }
 	});
 	return Location;
 };
