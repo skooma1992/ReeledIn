@@ -6,7 +6,7 @@
 
 ![Issues Badge](https://img.shields.io/github/issues/skooma1992/ReeledIn)
 ![Forks](https://img.shields.io/github/forks/skooma1992/ReeledIn)
-![Contributors](https://img.shields.io/badge/Contributors-4-orange)
+![Contributors](https://img.shields.io/badge/Contributors-5-orange)
 ![Pull Requests](https://img.shields.io/badge/Pull%20Requests-0-green)
 ![License](https://img.shields.io/github/license/skooma1992/ReeledIn)
 
