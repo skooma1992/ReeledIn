@@ -1,4 +1,4 @@
-![ReeledIn Logo](public/img/reeledin-logo-black.png =200x200)
+![ReeledIn Logo](public/img/reeledin-logo-black.png)
 
 >Reeledin is a social media application geared towards fisherman all across the country!
 >Log in and show your friends where you've been, or see where they've gone!
