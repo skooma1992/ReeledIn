@@ -1,4 +1,4 @@
-![ReeledIn Logo](public/img/reeledin-logo-black.png?s=400)
+![ReeledIn Logo](public/img/reeledin-logo-black.png =200x200)
 
 >Reeledin is a social media application geared towards fisherman all across the country!
 >Log in and show your friends where you've been, or see where they've gone!
@@ -6,7 +6,7 @@
 
 ![Issues Badge](https://img.shields.io/github/issues/skooma1992/ReeledIn)
 ![Forks](https://img.shields.io/github/forks/skooma1992/ReeledIn)
-![Contributors](https://img.shields.io/badge/Contributors-4-orange)
+![Contributors](https://img.shields.io/badge/Contributors-5-orange)
 ![Pull Requests](https://img.shields.io/badge/Pull%20Requests-0-green)
 ![License](https://img.shields.io/github/license/skooma1992/ReeledIn)
 
